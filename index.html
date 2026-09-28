@@ -5,11 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Ritter | Свет твоих эмоций</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Ваши фирменные цвета */
             background: linear-gradient(
                 -45deg, 
                 #00265c, 
@@ -20,9 +23,10 @@
                 #06091a
             );
             background-size: 400% 400%;
+            /* Плавная анимация, которая 100% работает на телефонах */
             animation: gradientBG 15s ease infinite;
-            margin: 0;
-            padding: 0;
+            background-attachment: fixed;
+            color: white;
         }
 
         @keyframes gradientBG {
@@ -30,107 +34,109 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
+        .glass-btn {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            /* Очень сильное базовое белое свечение */
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px 20px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: white;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
         
-        .fade-in-up {
-            animation: fadeInUp 1.2s cubic-bezier(0.2, 1, 0.3, 1) forwards;
-            opacity: 0;
-            transform: translateY(20px);
+        /* Эффект при наведении курсора */
+        .glass-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            /* Свечение усиливается */
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+            border-color: rgba(255, 255, 255, 0.3);
         }
 
-        .delay-100 { animation-delay: 200ms; }
-        .delay-200 { animation-delay: 400ms; }
+        /* Эффект при клике/касании пальцем на телефоне */
+        .glass-btn:active {
+            transform: scale(0.94);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.12);
+        }
 
-        @keyframes fadeInUp {
+        /* Легкая анимация появления при загрузке */
+        .fade-in {
+            animation: fadeIn 1.2s ease-out forwards;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        .delay-100 { animation-delay: 0.2s; }
+        .delay-200 { animation-delay: 0.4s; }
+
+        @keyframes fadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        /* Элегантное подчеркивание ссылок при наведении */
-        .hover-underline-animation {
-            display: inline-block;
-            position: relative;
-        }
-
-        .hover-underline-animation::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            transform: scaleX(0);
-            height: 1px;
-            bottom: -4px;
-            left: 0;
-            background-color: rgba(255, 255, 255, 0.6);
-            transform-origin: bottom right;
-            transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
-        }
-
-        .hover-underline-animation:hover::after {
-            transform: scaleX(1);
-            transform-origin: bottom left;
-        }
     </style>
 </head>
 
-<body class="text-white min-h-screen flex flex-col items-center justify-center relative overflow-hidden selection:bg-blue-500 selection:text-white px-6">
+<body class="min-h-screen flex flex-col items-center justify-center p-6 selection:bg-white/30">
 
-    <!-- Легкое свечение на фоне -->
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent pointer-events-none"></div>
-
-    <main class="w-full max-w-sm flex flex-col items-center z-10 relative mt-[-5vh]">
+    <!-- Строгий мобильный контейнер с ограничением ширины в 320px -->
+    <main class="w-full max-w-[320px] flex flex-col items-center gap-12 z-10 relative">
         
-        <div class="flex flex-col items-center w-full fade-in-up">
-            <!-- Логотип -->
+        <!-- Блок логотипа и слогана -->
+        <div class="flex flex-col items-center gap-3 fade-in w-full">
             <img 
                 src="RITTER белый.png" 
                 alt="RITTER" 
-                class="w-64 sm:w-72 object-contain select-none filter drop-shadow-2xl opacity-95 transition-opacity duration-500 hover:opacity-100"
+                class="w-full h-auto object-contain drop-shadow-lg"
             >
-            
-            <!-- Слоган -->
-            <h1 class="mt-8 text-xl sm:text-2xl font-light tracking-[0.15em] text-white/80 uppercase text-center">
+            <h1 class="text-white/80 font-light text-[13px] tracking-[0.2em] uppercase text-center mt-2">
                 Свет твоих эмоций
             </h1>
         </div>
 
-        <div class="flex flex-col items-center space-y-8 w-full mt-16 fade-in-up delay-100">
+        <!-- Блок с ссылками -->
+        <div class="flex flex-col gap-6 w-full fade-in delay-100">
             
-            <!-- Ссылка Email -->
-            <a 
-                href="mailto:design-studio@rev.ru" 
-                class="group flex flex-col items-center cursor-pointer"
-            >
-                <span class="text-xs text-white/40 mb-1.5 tracking-[0.2em] uppercase font-extralight transition-colors group-hover:text-white/60">
+            <!-- Кнопка 1: Почта -->
+            <div class="flex flex-col gap-2 items-center">
+                <span class="text-[11px] text-white/50 uppercase tracking-widest font-light">
                     Связаться с нами
                 </span>
-                <span class="text-lg sm:text-xl font-light tracking-wider text-white/90 hover-underline-animation pb-1">
+                <a href="mailto:design-studio@rev.ru" class="glass-btn">
                     design-studio@rev.ru
-                </span>
-            </a>
+                </a>
+            </div>
 
-            <!-- Ссылка Website -->
-            <a 
-                href="https://ritter.pro/ru/" 
-                target="_blank"
-                rel="noopener noreferrer"
-                class="group flex flex-col items-center cursor-pointer"
-            >
-                <span class="text-xs text-white/40 mb-1.5 tracking-[0.2em] uppercase font-extralight transition-colors group-hover:text-white/60">
+            <!-- Кнопка 2: Сайт -->
+            <div class="flex flex-col gap-2 items-center">
+                <span class="text-[11px] text-white/50 uppercase tracking-widest font-light">
                     Наш сайт
                 </span>
-                <span class="text-lg sm:text-xl font-light tracking-wider text-white/90 hover-underline-animation pb-1">
+                <a href="https://ritter.pro/ru/" target="_blank" rel="noopener noreferrer" class="glass-btn">
                     ritter.pro/ru/
-                </span>
-            </a>
+                </a>
+            </div>
 
         </div>
 
     </main>
 
-    <footer class="absolute bottom-8 w-full text-center fade-in-up delay-200 pointer-events-none z-10">
-        <p class="text-white/30 text-[10px] sm:text-xs tracking-[0.2em] uppercase font-extralight">
-            &copy; 2026 RITTER DESIGN STUDIO
+    <!-- Минималистичный футер -->
+    <footer class="absolute bottom-6 w-full text-center fade-in delay-200 pointer-events-none">
+        <p class="text-white/20 text-[10px] tracking-widest uppercase font-light">
+            &copy; RITTER DESIGN STUDIO
         </p>
     </footer>
 
